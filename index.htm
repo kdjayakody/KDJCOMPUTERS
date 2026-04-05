@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDJ Computers | Ultimate Tech Partner</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0f172a',
+                        neonBlue: '#00f3ff',
+                        neonPurple: '#a855f7',
+                        glassBg: 'rgba(15, 23, 42, 0.65)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for specialized effects -->
+    <style>
+        body {
+            background-color: #0f172a; /* Fallback */
+            color: #ffffff;
+            overflow-x: hidden;
+            /* Subtly textured dark gradient */
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 70%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+
+        /* Hover Glow Effects */
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+        .hover-glow:hover {
+            border-color: #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Neon Text Utilities */
+        .text-neon {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Custom Cursor (Hidden on touch devices) */
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0, 243, 255, 0.4);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            box-shadow: 0 0 40px 20px rgba(0, 243, 255, 0.2);
+            transition: width 0.2s, height 0.2s;
+        }
+        
+        /* Particle container */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Disable custom cursor on mobile */
+        @media (pointer: coarse) {
+            #custom-cursor { display: none; }
+        }
+        
+        /* Dark map inversion hack */
+        .dark-map iframe {
+            filter: invert(90%) hue-rotate(180deg) brightness(100%) contrast(100%);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neonBlue selection:text-darkbg relative">
+
+    <!-- Custom Glowing Cursor -->
+    <div id="custom-cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 rounded bg-gradient-to-br from-neonBlue to-neonPurple flex items-center justify-center text-darkbg font-tech font-bold text-xl">
+                        KDJ
+                    </div>
+                    <span class="font-tech font-bold text-2xl tracking-wider text-white">
+                        KDJ <span class="text-neonBlue">COMPUTERS</span>
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 font-tech text-sm tracking-widest">
+                        <a href="#home" class="hover:text-neonBlue text-white transition-colors">HOME</a>
+                        <a href="#about" class="hover:text-neonBlue text-gray-300 transition-colors">ABOUT</a>
+                        <a href="#services" class="hover:text-neonBlue text-gray-300 transition-colors">SERVICES</a>
+                        <a href="#sales" class="hover:text-neonBlue text-gray-300 transition-colors">SALES</a>
+                        <a href="#contact" class="hover:text-neonBlue text-gray-300 transition-colors">CONTACT</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-tech text-center">
+                <a href="#home" class="block px-3 py-2 text-white hover:text-neonBlue">HOME</a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-neonBlue">ABOUT</a>
+                <a href="#services" class="block px-3 py-2 text-gray-300 hover:text-neonBlue">SERVICES</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-300 hover:text-neonBlue">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Interactive Background -->
+        <div id="particles-js"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto" data-aos="zoom-in" data-aos-duration="1200">
+            <h1 class="font-tech text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight">
+                YOUR ULTIMATE <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue to-neonPurple text-neon">TECH PARTNER</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto font-light">
+                Expert Chip-Level Repairs, High-Performance Hardware, & Unbeatable Service.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#services" class="relative inline-flex group items-center justify-center px-8 py-4 font-tech font-bold text-darkbg bg-neonBlue rounded-md overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,243,255,0.6)]">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fas fa-microchip"></i> Explore Services
+                    </span>
+                    <div class="absolute inset-0 h-full w-full bg-white/20 group-hover:scale-x-100 scale-x-0 origin-left transition-transform duration-300 ease-out"></div>
+                </a>
+                <a href="#contact" class="relative inline-flex group items-center justify-center px-8 py-4 font-tech font-bold text-white glass rounded-md overflow-hidden transition-all hover:border-neonPurple hover:shadow-[0_0_25px_rgba(168,85,247,0.4)]">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
+            <a href="#about" class="text-gray-400 hover:text-neonBlue transition-colors">
+                <i class="fas fa-chevron-down text-3xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="font-tech text-3xl md:text-4xl font-bold mb-6">
+                        <span class="text-neonBlue">>></span> WHO WE ARE
+                    </h2>
+                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                        At <span class="text-white font-bold">KDJ Computers</span>, we don't just fix devices; we engineer solutions. With over a half-decade of dedicated industry experience, we specialize in breathing new life into damaged electronics and architecting high-end custom rigs.
+                    </p>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        From microscopic motherboard diagnostics to deploying liquid-cooled gaming behemoths, our certified technicians treat every piece of hardware with clinical precision. We believe in transparency, speed, and using 100% genuine components.
+                    </p>
+                    <ul class="space-y-4 font-tech text-sm tracking-wide">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-neonPurple"></i> 5+ Years Industry Experience
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-neonPurple"></i> Specialized Chip-Level Engineering
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check text-neonPurple"></i> Trusted by Gamers & Professionals
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="relative" data-aos="fade-left">
+                    <div class="glass p-2 rounded-xl relative z-10 hover-glow">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Motherboard Repair" class="rounded-lg w-full h-auto object-cover opacity-80" loading="lazy">
+                    </div>
+                    <!-- Decorative back blob -->
+                    <div class="absolute -top-10 -right-10 w-64 h-64 bg-neonBlue/20 rounded-full blur-3xl -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Sales (Interactive Grid) -->
+    <section id="services" class="py-24 bg-darkbg/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-tech text-4xl md:text-5xl font-bold mb-4">OUR <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonBlue to-neonPurple">EXPERTISE</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Comprehensive tech solutions tailored for ultimate performance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="glass p-8 rounded-xl hover-glow group cursor-default" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-neonBlue/20 transition-colors">
+                        <i class="fas fa-microchip text-3xl text-neonBlue group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="font-tech text-xl font-bold mb-3 text-white">Chip-Level Repair</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Advanced motherboard diagnostics, IC replacements, and microscopic soldering for dead laptops and desktops.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass p-8 rounded-xl hover-glow group cursor-default" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center mb-6 group-hover:bg-neonPurple/20 transition-colors">
+                        <i class="fas fa-desktop text-3xl text-neonPurple group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="font-tech text-xl font-bold mb-3 text-white">Custom PC Builds</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Tailor-made rigs for 4K gaming, 3D rendering, and professional workstations with optimized airflow.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div id="sales" class="glass p-8 rounded-xl hover-glow group cursor-default" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center mb-6 group-hover:bg-neonBlue/20 transition-colors">
+                        <i class="fas fa-memory text-3xl text-neonBlue group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="font-tech text-xl font-bold mb-3 text-white">Hardware Sales</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Premium Laptops, high-speed RAM, NVMe SSDs, and flagship GPUs from trusted global brands.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass p-8 rounded-xl hover-glow group cursor-default" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center mb-6 group-hover:bg-neonPurple/20 transition-colors">
+                        <i class="fas fa-compact-disc text-3xl text-neonPurple group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h3 class="font-tech text-xl font-bold mb-3 text-white">Software Solutions</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Clean OS installations, stubborn malware removal, data recovery, and system optimization.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Trust Indicators (Stats) -->
+    <section id="stats" class="py-20 border-y border-gray-800 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-neonBlue/5 to-neonPurple/5"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-gray-800">
+                
+                <div class="p-4" data-aos="zoom-in">
+                    <div class="font-tech text-5xl md:text-6xl font-black text-white mb-2 flex justify-center items-baseline">
+                        <span class="stat-counter" data-target="1000">0</span>
+                        <span class="text-neonBlue">+</span>
+                    </div>
+                    <p class="text-gray-400 font-tech tracking-widest text-sm uppercase">Happy Customers</p>
+                </div>
+
+                <div class="p-4 pt-10 md:pt-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="font-tech text-5xl md:text-6xl font-black text-white mb-2 flex justify-center items-baseline">
+                        <span class="stat-counter" data-target="5">0</span>
+                        <span class="text-neonPurple">+</span>
+                    </div>
+                    <p class="text-gray-400 font-tech tracking-widest text-sm uppercase">Years Excellence</p>
+                </div>
+
+                <div class="p-4 pt-10 md:pt-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="font-tech text-5xl md:text-6xl font-black text-white mb-2 flex justify-center items-baseline">
+                        <span class="stat-counter" data-target="100">0</span>
+                        <span class="text-neonBlue">%</span>
+                    </div>
+                    <p class="text-gray-400 font-tech tracking-widest text-sm uppercase">Genuine Parts</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-tech text-4xl md:text-5xl font-bold mb-4">INITIATE <span class="text-neonBlue">CONTACT</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Get a quote, schedule a repair, or consult for your next build.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Form -->
+                <div class="glass p-8 rounded-xl" data-aos="fade-right">
+                    <form onsubmit="event.preventDefault(); alert('Message routing initialized... (Demo Only)');">
+                        <div class="mb-6">
+                            <label class="block text-gray-400 text-sm font-tech mb-2" for="name">ID / Name</label>
+                            <input class="w-full bg-darkbg border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-colors" id="name" type="text" required placeholder="John Doe">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-400 text-sm font-tech mb-2" for="phone">Comm Link / Phone</label>
+                            <input class="w-full bg-darkbg border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-colors" id="phone" type="tel" required placeholder="+1 234 567 8900">
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-gray-400 text-sm font-tech mb-2" for="message">Diagnostic Data / Inquiry</label>
+                            <textarea class="w-full bg-darkbg border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-neonBlue focus:ring-1 focus:ring-neonBlue transition-colors h-32 resize-none" id="message" required placeholder="Describe your issue or build requirements..."></textarea>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-neonBlue to-neonPurple text-darkbg font-tech font-bold py-4 rounded-md hover:opacity-90 transition-opacity flex justify-center items-center gap-2" type="submit">
+                            TRANSMIT DATA <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Location & Info -->
+                <div class="flex flex-col gap-8" data-aos="fade-left">
+                    <div class="glass p-8 rounded-xl flex-grow dark-map overflow-hidden">
+                        <!-- Embedded Google Map (New York placeholder) -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.2528000654!2d-74.14448744574902!3d40.69763123334691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1689100000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0; min-height: 250px; border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-xl flex items-start gap-4">
+                            <div class="text-neonBlue text-2xl mt-1"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4 class="font-tech text-white mb-1">HQ Coordinates</h4>
+                                <p class="text-sm text-gray-400">128 Tech Boulevard<br>Silicon District, NY 10001</p>
+                            </div>
+                        </div>
+                        <div class="glass p-6 rounded-xl flex items-start gap-4">
+                            <div class="text-neonPurple text-2xl mt-1"><i class="fas fa-clock"></i></div>
+                            <div>
+                                <h4 class="font-tech text-white mb-1">Operating Hours</h4>
+                                <p class="text-sm text-gray-400">Mon - Sat: 09:00 - 19:00<br>Sun: Emergency Protocols Only</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-black/50 pt-12 pb-6 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-gradient-to-br from-neonBlue to-neonPurple flex items-center justify-center text-darkbg font-tech font-bold text-xs">
+                        KDJ
+                    </div>
+                    <span class="font-tech font-bold text-xl text-white">
+                        KDJ <span class="text-gray-500">COMPUTERS</span>
+                    </span>
+                </div>
+
+                <!-- Socials -->
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neonBlue hover:border-neonBlue transition-all">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-green-400 hover:border-green-400 transition-all">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-neonPurple hover:border-neonPurple transition-all">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 pt-8 border-t border-gray-800/50">
+                <p class="text-gray-600 text-sm font-tech">
+                    &copy; <span id="year"></span> KDJ Computers. All Systems Operational.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Particles.js for hero background -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- AOS for scroll animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // 1. Initialize Particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#00f3ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#00f3ff", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 1.5, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.8 } },
+                    push: { particles_nb: 3 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // 2. Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // 3. Custom Cursor Logic via GSAP
+        const cursor = document.getElementById('custom-cursor');
+        
+        // Only run mousemove tracking if device supports hover
+        if (window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                gsap.to(cursor, {
+                    x: e.clientX,
+                    y: e.clientY,
+                    duration: 0.15,
+                    ease: "power2.out"
+                });
+            });
+
+            // Make cursor expand slightly on clickable elements
+            const clickables = document.querySelectorAll('a, button, input, textarea');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(cursor, { scale: 1.5, backgroundColor: 'rgba(168,85,247,0.4)', duration: 0.2 });
+                });
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(cursor, { scale: 1, backgroundColor: 'rgba(0,243,255,0.4)', duration: 0.2 });
+                });
+            });
+        }
+
+        // 4. GSAP Stats Counter Automation
+        const statsSection = document.getElementById('stats');
+        const counters = document.querySelectorAll('.stat-counter');
+        let animated = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    animated = true;
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        gsap.fromTo(counter, 
+                            { innerHTML: 0 }, 
+                            { 
+                                innerHTML: target, 
+                                duration: 2.5, 
+                                ease: "power3.out",
+                                snap: { innerHTML: 1 },
+                                onUpdate: function() {
+                                    counter.innerHTML = Math.ceil(this.targets()[0].innerHTML);
+                                }
+                            }
+                        );
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+
+        // 5. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Set dynamic year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 6. Navbar Blur Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg', 'shadow-neonBlue/10');
+            } else {
+                nav.classList.remove('shadow-lg', 'shadow-neonBlue/10');
+            }
+        });
+    </script>
+</body>
+</html>
